@@ -1,7 +1,5 @@
 package assign02;
 
-import assign01.MathVector;
-
 /**
  * This class represents a University of Utah student, in which the uNID cannot
  * change once the student is created.  Note that each student's uNID is unique.
@@ -80,8 +78,7 @@ public class UofUStudent {
 	 * @return true if the other object is a UofUStudent type and is equal to this student, 
 	 *         false otherwise
 	 */
-	public boolean equals(Object other) {		
-		// FILL IN -- do not return false unless appropriate
+	public boolean equals(Object other) {
 		if (!(other instanceof UofUStudent))
 			return false;
 
