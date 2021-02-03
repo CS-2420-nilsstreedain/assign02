@@ -1,11 +1,12 @@
 package assign02;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * This class represents a CS2420 student, in which the uNID cannot change once
  * the student is created. Note that each student's uNID is unique. contact
- * information in the form of an email adress is stored along with assignment
+ * information in the form of an email address is stored along with assignment
  * scores in several ArrayLists, depending on the assignment category.
  * 
  * @author Nils Streedain, Kyle Williams
@@ -76,6 +77,9 @@ public class CS2420Student extends UofUStudent {
 	 * @return undefined
 	 */
 	public double computeFinalScore() {
+		
+		
+		
 		return 0;
 	}
 
