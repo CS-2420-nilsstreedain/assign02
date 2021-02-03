@@ -1,7 +1,6 @@
 package assign02;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * This class represents a CS2420 student, in which the uNID cannot change once
@@ -13,6 +12,11 @@ import java.util.Iterator;
  * @version Febuary 2, 2021
  */
 public class CS2420Student extends UofUStudent {
+
+	private final double LAB_WEIGHT = .10;
+	private final double QUIZ_WEIGHT = .10;
+	private final double EXAM_WEIGHT = .30;
+	private final double ASSIGNEMNT_WEIGHT = .50;
 
 	private EmailAddress contactInfo;
 
@@ -77,10 +81,16 @@ public class CS2420Student extends UofUStudent {
 	 * @return undefined
 	 */
 	public double computeFinalScore() {
+		double tempCategoryScore = 0;
+		double finalScoreSum = 0;
 		
+		for (Double score : assignScores) {
+			tempCategoryScore += score;
+		}
 		
+		finalScoreSum += tempCategoryScore * 0;
 		
-		return 0;
+		return finalScoreSum;
 	}
 
 	/**
