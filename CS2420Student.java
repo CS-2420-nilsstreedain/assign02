@@ -36,7 +36,7 @@ public class CS2420Student extends UofUStudent {
 	 */
 	public CS2420Student(String firstName, String lastName, int uNID, EmailAddress contactInfo) {
 		super(firstName, lastName, uNID);
-		contactInfo = this.contactInfo;
+		this.contactInfo = contactInfo;
 	}
 
 	/**
