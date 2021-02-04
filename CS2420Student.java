@@ -77,9 +77,11 @@ public class CS2420Student extends UofUStudent {
 	}
 
 	/**
-	 * Undefined
+	 * Returns the final score of a student in the form of a percentage held by a
+	 * double. This also uses averageArray to remove the lowest lab and quiz score
+	 * from the final grade.
 	 * 
-	 * @return undefined
+	 * @return finalScoreSum
 	 */
 	public double computeFinalScore() {
 		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1)) {
@@ -99,8 +101,12 @@ public class CS2420Student extends UofUStudent {
 	}
 
 	/**
-	 * Undefined
+	 * Computes the average score out of all scores in a Double array. If remove is
+	 * True, the lowest score in the array will be removed.
 	 * 
+	 * @param array
+	 * @param remove - If true, the lowest score for that category will be removed
+	 *               before taking the average.
 	 * @return avg
 	 */
 	private double averageArray(ArrayList<Double> array, boolean remove) {
@@ -120,9 +126,10 @@ public class CS2420Student extends UofUStudent {
 	}
 
 	/**
-	 * Undefined
+	 * Computes the final letter grade based on the grade percentage given by a
+	 * double.
 	 * 
-	 * @return undefined
+	 * @return finalGrade
 	 */
 	public String computeFinalGrade() {
 		double score = computeFinalScore();

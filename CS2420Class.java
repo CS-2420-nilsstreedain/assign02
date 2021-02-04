@@ -12,7 +12,7 @@ import java.util.Scanner;
  * NOTE: The word "Class" in the name of this Java class means a collection of students and should not 
  *       be confused with the Java term class, which is a blueprint for making objects.
  * 
- * @author Erin Parker and ??
+ * @author Erin Parker, Nils Streedain and Kyle Willaims
  * @version January 27, 2021
  */
 public class CS2420Class {

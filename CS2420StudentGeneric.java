@@ -77,20 +77,22 @@ public class CS2420StudentGeneric<Type> extends UofUStudent {
 	}
 
 	/**
-	 * Undefined
+	 * Returns the final score of a student in the form of a percentage held by a
+	 * double. This also uses averageArray to remove the lowest lab and quiz score
+	 * from the final grade.
 	 * 
-	 * @return undefined
+	 * @return finalScoreSum
 	 */
 	public double computeFinalScore() {
 		double finalScoreSum = 0;
-		
+
 		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1)) {
 			return 0;
 		}
 
 		Collections.sort(labScores);
 		Collections.sort(quizScores);
-		
+
 		finalScoreSum += averageArray(labScores, true) * LAB_WEIGHT;
 		finalScoreSum += averageArray(quizScores, true) * QUIZ_WEIGHT;
 		finalScoreSum += averageArray(examScores, false) * EXAM_WEIGHT;
@@ -100,13 +102,17 @@ public class CS2420StudentGeneric<Type> extends UofUStudent {
 	}
 
 	/**
-	 * Undefined
+	 * Computes the average score out of all scores in a Double array. If remove is
+	 * True, the lowest score in the array will be removed.
 	 * 
+	 * @param array
+	 * @param remove - If true, the lowest score for that category will be removed
+	 *               before taking the average.
 	 * @return avg
 	 */
 	private double averageArray(ArrayList<Double> array, boolean remove) {
 		double avg = 0;
-		
+
 		if (remove) {
 			for (int i = 1; i < array.size(); i++) {
 				avg += array.get(i);
@@ -118,45 +124,50 @@ public class CS2420StudentGeneric<Type> extends UofUStudent {
 			}
 			avg = avg / array.size();
 		}
-		
+
 		return avg;
 	}
 
 	/**
-	 * Undefined
+	 * Computes the final letter grade based on the grade percentage given by a
+	 * double.
 	 * 
-	 * @return undefined
+	 * @return finalGrade
 	 */
 	public String computeFinalGrade() {
 		double score = computeFinalScore();
-		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1)){
+		String finalGrade;
+		
+		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1)) {
 			return "N/A";
 		}
-		
+
 		if (score >= 93.0) {
-			return "A";
+			finalGrade =  "A";
 		} else if (score >= 90.0) {
-			return "A-";
+			finalGrade = "A-";
 		} else if (score >= 87.0) {
-			return "B+";
+			finalGrade = "B+";
 		} else if (score >= 83.0) {
-			return "B";
+			finalGrade = "B";
 		} else if (score >= 80.0) {
-			return "B-";
+			finalGrade = "B-";
 		} else if (score >= 77.0) {
-			return "C+";
+			finalGrade = "C+";
 		} else if (score >= 73.0) {
-			return "C";
+			finalGrade = "C";
 		} else if (score >= 70.0) {
-			return "C-";
+			finalGrade = "C-";
 		} else if (score >= 67.0) {
-			return "D+";
-		} else if (score >= 63.0) { 
-			return "D";
-		} else if (score >= 60.0) { 
-			return "D-";
+			finalGrade = "D+";
+		} else if (score >= 63.0) {
+			finalGrade = "D";
+		} else if (score >= 60.0) {
+			finalGrade = "D-";
 		} else {
-			return "E";
+			finalGrade = "E";
 		}
+		
+		return finalGrade;
 	}
 }
