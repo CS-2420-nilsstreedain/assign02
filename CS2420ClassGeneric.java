@@ -115,7 +115,9 @@ public class CS2420ClassGeneric<Type> {
 		ArrayList<Type> contactList = new ArrayList<>();
 
 		for (CS2420StudentGeneric<Type> student : studentList) {
+			if (!contactList.contains(student.getContactInfo())) {
 			contactList.add(student.getContactInfo());
+			}
 		}
 
 		return contactList;

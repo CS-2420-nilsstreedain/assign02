@@ -36,7 +36,7 @@ public class CS2420Student extends UofUStudent {
 	 */
 	public CS2420Student(String firstName, String lastName, int uNID, EmailAddress contactInfo) {
 		super(firstName, lastName, uNID);
-		this.contactInfo = contactInfo;
+		contactInfo = this.contactInfo;
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class CS2420Student extends UofUStudent {
 	 * @return undefined
 	 */
 	public double computeFinalScore() {
-		if ((labScores.size() <= 2) || (quizScores.size() <= 2) || (examScores.size() <= 1) || (assignScores.size() <= 1)){
+		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1)){
 			return 0;
 		}
 		double finalScoreSum = 0;
@@ -114,7 +114,7 @@ public class CS2420Student extends UofUStudent {
 	 */
 	public String computeFinalGrade() {
 		double score = computeFinalScore();
-		if ((labScores.size() <= 2) || (quizScores.size() <= 2) || (examScores.size() <= 1) || (assignScores.size() <= 1)){
+		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1)){
 			return "N/A";
 		}
 		
