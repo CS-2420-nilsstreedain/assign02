@@ -112,7 +112,9 @@ public class CS2420Class {
 		ArrayList<EmailAddress> contactList = new ArrayList<>();
 
 		for (CS2420Student student : studentList) {
-			contactList.add(student.getContactInfo());
+			if (!contactList.contains(student.getContactInfo())) {
+				contactList.add(student.getContactInfo());
+			}
 		}
 
 		return contactList;

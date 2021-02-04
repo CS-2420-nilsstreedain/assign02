@@ -116,7 +116,7 @@ public class CS2420ClassGeneric<Type> {
 
 		for (CS2420StudentGeneric<Type> student : studentList) {
 			if (!contactList.contains(student.getContactInfo())) {
-			contactList.add(student.getContactInfo());
+				contactList.add(student.getContactInfo());
 			}
 		}
 
