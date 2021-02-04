@@ -3,8 +3,6 @@ package assign02;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import com.sun.org.apache.bcel.internal.generic.AnnotationElementValueGen;
-
 /**
  * This class represents a CS2420 student, in which the uNID cannot change once
  * the student is created. Note that each student's uNID is unique. contact
