@@ -233,10 +233,15 @@ public class CS2420ClassGeneric<Type> {
 		}
 	}
 
+	/**
+	 * Comparator that defines an ordering among CS 2420 students using their
+	 * scores. Compares by scores, then uNID (if both names are the same). uNIDs are
+	 * guaranteed to be unique.
+	 */
 	protected class OrderByScore implements Comparator<CS2420StudentGeneric<Type>> {
 		public int compare(CS2420StudentGeneric<Type> lhs, CS2420StudentGeneric<Type> rhs) {
 			int difference = (int) (lhs.computeFinalScore() - rhs.computeFinalScore());
-			
+
 			if (difference == 0) {
 				difference = lhs.getUNID() - rhs.getUNID();
 			}
