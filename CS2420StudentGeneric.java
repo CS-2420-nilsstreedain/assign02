@@ -1,6 +1,9 @@
 package assign02;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
+import com.sun.org.apache.bcel.internal.generic.AnnotationElementValueGen;
 
 /**
  * This class represents a CS2420 student, in which the uNID cannot change once
@@ -81,14 +84,19 @@ public class CS2420StudentGeneric<Type> extends UofUStudent {
 	 * @return undefined
 	 */
 	public double computeFinalScore() {
+		double finalScoreSum = 0;
+		
 		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1)) {
 			return 0;
 		}
-		double finalScoreSum = 0;
-		finalScoreSum += averageArray(labScores) * LAB_WEIGHT;
-		finalScoreSum += averageArray(assignScores) * ASSIGNMENT_WEIGHT;
-		finalScoreSum += averageArray(quizScores) * QUIZ_WEIGHT;
-		finalScoreSum += averageArray(examScores) * EXAM_WEIGHT;
+
+		Collections.sort(labScores);
+		Collections.sort(quizScores);
+		
+		finalScoreSum += averageArray(labScores, true) * LAB_WEIGHT;
+		finalScoreSum += averageArray(quizScores, true) * QUIZ_WEIGHT;
+		finalScoreSum += averageArray(examScores, false) * EXAM_WEIGHT;
+		finalScoreSum += averageArray(assignScores, false) * ASSIGNMENT_WEIGHT;
 
 		return finalScoreSum;
 	}
@@ -98,12 +106,21 @@ public class CS2420StudentGeneric<Type> extends UofUStudent {
 	 * 
 	 * @return avg
 	 */
-	private double averageArray(ArrayList<Double> array) {
+	private double averageArray(ArrayList<Double> array, boolean remove) {
 		double avg = 0;
-		for (double score : array) {
-			avg += score;
+		
+		if (remove) {
+			for (int i = 1; i < array.size(); i++) {
+				avg += array.get(i);
+			}
+			avg = avg / (array.size() - 1);
+		} else {
+			for (double score : array) {
+				avg += score;
+			}
+			avg = avg / array.size();
 		}
-		avg = avg / array.size();
+		
 		return avg;
 	}
 

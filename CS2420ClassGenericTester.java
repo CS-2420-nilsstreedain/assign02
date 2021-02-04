@@ -127,6 +127,7 @@ public class CS2420ClassGenericTester {
 		student.addScore(99, "assignment");
 		student.addScore(80, "lab");
 		student.addScore(77.7, "quiz");
+		System.out.println(student.computeFinalScore());
 		assertEquals("B", student.computeFinalGrade());
 	}
 	
@@ -177,7 +178,7 @@ public class CS2420ClassGenericTester {
 	@Test
 	public void testLargeStudentFinalScore() {
 		CS2420StudentGeneric<PhoneNumber> student = largeClass.lookup(1000000);
-		assertEquals(78.5, student.computeFinalScore(), 0.001);
+		assertEquals(79.5, student.computeFinalScore(), 0.001);
 	}
 		
 	@Test
