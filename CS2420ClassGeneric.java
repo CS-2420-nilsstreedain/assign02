@@ -116,8 +116,13 @@ public class CS2420ClassGeneric<Type> {
 	 * @return the duplicate-free list of contact information, in any order
 	 */
 	public ArrayList<Type> getContactList() {
-		// FILL IN -- do not return null
-		return null;
+		ArrayList<Type> contactList = new ArrayList<>();
+		
+		for (CS2420StudentGeneric<Type> student : studentList) {
+			contactList.add(student.getContactInfo());
+		}
+		
+		return contactList;
 	}
 
 	/**
@@ -126,6 +131,7 @@ public class CS2420ClassGeneric<Type> {
 	 */
 	public ArrayList<CS2420StudentGeneric<Type>> getOrderedByUNID() {
 		ArrayList<CS2420StudentGeneric<Type>> studentListCopy = new ArrayList<CS2420StudentGeneric<Type>>();
+		
 		for (CS2420StudentGeneric<Type> student : studentList)
 			studentListCopy.add(student);
 
@@ -141,8 +147,14 @@ public class CS2420ClassGeneric<Type> {
 	 * order).
 	 */
 	public ArrayList<CS2420StudentGeneric<Type>> getOrderedByName() {
-		// FILL IN — do not return null
-		return null;
+		ArrayList<CS2420StudentGeneric<Type>> studentListCopy = new ArrayList<CS2420StudentGeneric<Type>>();
+		
+		for (CS2420StudentGeneric<Type> student : studentList)
+			studentListCopy.add(student);
+		
+		sort(studentListCopy, new OrderByName());
+		
+		return studentListCopy;
 	}
 
 	/**
@@ -199,6 +211,18 @@ public class CS2420ClassGeneric<Type> {
 	 * uNID (if both names are the same). uNIDs are guaranteed to be unique.
 	 */
 	protected class OrderByName implements Comparator<CS2420StudentGeneric<Type>> {
-		// FILL IN
+		public int compare(CS2420StudentGeneric<Type> lhs, CS2420StudentGeneric<Type> rhs) {
+			int difference = lhs.getLastName().compareTo(rhs.getLastName());
+			
+			if (difference == 0) {
+				difference = lhs.getFirstName().compareTo(rhs.getFirstName());
+				
+				if (difference == 0) {
+					difference = lhs.getUNID() - rhs.getUNID();
+				}	
+			}
+			
+			return difference;
+		}
 	}
 }
