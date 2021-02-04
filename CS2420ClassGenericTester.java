@@ -178,7 +178,7 @@ public class CS2420ClassGenericTester {
 	@Test
 	public void testLargeStudentFinalScore() {
 		CS2420StudentGeneric<PhoneNumber> student = largeClass.lookup(1000000);
-		assertEquals(79.5, student.computeFinalScore(), 0.001);
+		assertEquals(78.5, student.computeFinalScore(), 0.001);
 	}
 		
 	@Test

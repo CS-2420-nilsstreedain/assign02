@@ -1,10 +1,6 @@
 package assign02;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Comparator;
 
 /**
@@ -72,7 +68,7 @@ public class CS2420ClassGeneric<Type> {
 	public ArrayList<CS2420StudentGeneric<Type>> lookup(Type contactInfo) {
 		ArrayList<CS2420StudentGeneric<Type>> sameStudents = new ArrayList<>();
 		for (CS2420StudentGeneric<Type> student : studentList) {
-			if (student.getContactInfo() == contactInfo) {
+			if (student.getContactInfo().equals(contactInfo)) {
 				sameStudents.add(student);
 			}
 		}
