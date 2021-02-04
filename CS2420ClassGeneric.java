@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Comparator;
 
 /**
  * This Java class represents an unordered collection of University of Utah students enrolled in CS 2420.
@@ -17,13 +18,13 @@ import java.util.Scanner;
  */
 public class CS2420ClassGeneric<Type> {
 
-	private ArrayList<CS2420Student> studentList;
+	private ArrayList<CS2420StudentGeneric<Type>> studentList;
 	
 	/**
 	 * Creates an empty CS 2420 class.
 	 */
 	public CS2420ClassGeneric() {
-		this.studentList = new ArrayList<CS2420Student>();
+		this.studentList = new ArrayList<CS2420StudentGeneric<Type>>();
 	}
 	
 	/**
@@ -33,7 +34,7 @@ public class CS2420ClassGeneric<Type> {
 	 * @return true if the student was added, 
 	 *         false if the student was not added because they already exist in the collection
 	 */
-	public boolean addStudent(CS2420Student student) {
+	public boolean addStudent(CS2420StudentGeneric<Type> student) {
 		// FILL IN -- do not return false unless appropriate
 		return false;
 	}
@@ -44,7 +45,7 @@ public class CS2420ClassGeneric<Type> {
 	 * @param uNID - uNID of student to be retrieved
 	 * @return the CS 2420 student with the given uNID, or null if no such student exists in the collection
 	 */
-	public CS2420Student lookup(int uNID) {
+	public CS2420StudentGeneric<Type> lookup(int uNID) {
 		// FILL IN -- do not return null, unless appropriate
 		return null;
 	}
@@ -56,7 +57,7 @@ public class CS2420ClassGeneric<Type> {
 	 * @return a list of the CS 2420 student(s) with the given contact information (in any order), 
 	 * 	     or an empty list if no such students exist in the collection
 	 */
-	public ArrayList<CS2420Student> lookup(EmailAddress contactInfo) {
+	public ArrayList<CS2420StudentGeneric<Type>> lookup(Type contactInfo) {
 		// FILL IN -- do not return null
 		return null;
 	}
@@ -90,121 +91,90 @@ public class CS2420ClassGeneric<Type> {
 	 *
 	 * @return the duplicate-free list of contact information, in any order
 	 */
-	public ArrayList<EmailAddress> getContactList() {
+	public ArrayList<Type> getContactList() {
 		// FILL IN -- do not return null
 		return null;
 	}
 	
 	/**
-	 * Adds the students specified by the input file to the collection of students in CS 2420.
-	 * 
-	 * Assumes a very strict file format:
-	 *     -- first line: FirstName LastName (u0123456) userName@domainName
-	 *     -- second line: assignment scores, separated by blank spaces
-	 *     -- third line: exam scores, separated by blank spaces
-	 *     -- fourth line: lab scores, separated by blank spaces
-	 *     -- fifth line: quiz scores, separated by blank spaces
-	 *     -- sixth line ... : repeat of lines 1-5 for another student
-	 *     
-	 * Also assumes there are no duplicate students in the file.
-	 * 
-	 * @param filename - full or relative path to file containing student data
+	 * Returns the list of CS 2420 students in this class, sorted by uNID in ascending order.
 	 */
-	public void addAll(String filename) {
-		String[] categories = { "assignment", "exam", "lab", "quiz" };
-		
-		try {
-			Scanner fileIn = new Scanner(new File(filename));
-			int lineNumber = 0;
+	public ArrayList<CS2420StudentGeneric<Type>> getOrderedByUNID() {
+	    ArrayList<CS2420StudentGeneric<Type>> studentListCopy = new ArrayList<CS2420StudentGeneric<Type>>();
+	    for(CS2420StudentGeneric<Type> student : studentList)
+	   	 studentListCopy.add(student);
 
-			while(fileIn.hasNextLine()) {
-				
-				// first line: FirstName LastName (u0123456) userName@domainName
-				String line = fileIn.nextLine();
-				lineNumber++;
-				CS2420Student student = parseStudent(line, lineNumber);
-				
-				// second-fifth lines: assignment, exam, lab, and quiz scores
-				for(int i = 0; i < 4; i++) {
-					// make sure there is a next line ...
-					if(!fileIn.hasNextLine()) {
-						fileIn.close();
-						throw new ParseException(categories[i] + " scores ", lineNumber + 1);
-					}
-					
-					line = fileIn.nextLine();
-					lineNumber++;
-					parseScores(line, categories[i], student);
-				}
-				
-				addStudent(student);
-			}  // repeat for more students on sixth+ lines
-			
-			fileIn.close();
-		}
-		catch(FileNotFoundException e) {
-			System.err.println(e.getMessage() + " No students added to CS 2420 class.");
-		}
-		catch(ParseException e) {
-			System.err.println(e.getLocalizedMessage() + " formatted incorrectly at line " + e.getErrorOffset()
-					+ ". No students added to CS 2420 class.");
+	    sort(studentListCopy, new OrderByUNID());
+
+	    return studentListCopy;
+	}
+
+	/**
+	 * Returns the list of CS 2420 students in this class, sorted by last name in lexicographical order.
+	 * Breaks ties in last names using first names (lexicographical order).
+	 * Breaks ties in first names using uNIDs (ascending order).
+	 */
+	public ArrayList<CS2420StudentGeneric<Type>> getOrderedByName() {
+	    // FILL IN — do not return null
+	    return null;
+	}
+
+	/**
+	 * Returns the list of CS 2420 students in this class with a final score of at least cutoffScore, 
+	 * sorted by final score in descending order.  
+	 * Breaks ties in final scores using uNIDs (ascending order).
+	 * 
+	 * @param cutoffScore - value that a student's final score must be at or above to be included
+	 *                      in the returned list
+	 */
+	public ArrayList<CS2420StudentGeneric<Type>> getOrderedByScore(double cutoffScore) {
+	    // FILL IN — do not return null
+	    return null;
+	}
+
+	/**
+	 * Performs a SELECTION SORT on the input ArrayList. 
+	 * 
+	 * 1. Finds the smallest item in the list. 
+	 * 2. Swaps the smallest item with the first item in the list. 
+	 * 3. Reconsiders the list be the remaining unsorted portion (second item to Nth item) and 
+	 *    repeats steps 1, 2, and 3.
+	 */
+	private static <ListType> void sort(ArrayList<ListType> list, Comparator<ListType> c) {
+		for(int i = 0; i < list.size() - 1; i++) {
+			int j, minIndex;
+			for(j = i + 1, minIndex = i; j < list.size(); j++)
+				if(c.compare(list.get(j), list.get(minIndex)) < 0)
+					minIndex = j;
+			ListType temp = list.get(i);
+			list.set(i, list.get(minIndex));
+			list.set(minIndex, temp);
 		}
 	}
-	
+
 	/**
-	 * Helper method for parsing the information about a student from file.
-	 * 
-	 * @param line - string to be parsed
-	 * @param lineNumber - line number in file, used for error reporting (see above)
-	 * @return the CS2420Student constructed from the information
-	 * @throws ParseException if file containing line is not properly formatted (see above)
+	 * Comparator that defines an ordering among CS 2420 students using their uNIDs.
+	 * uNIDs are guaranteed to be unique, making a tie-breaker unnecessary.
 	 */
-	private CS2420Student parseStudent(String line, int lineNumber) throws ParseException {
-		Scanner lineIn = new Scanner(line);
-		lineIn.useDelimiter(" ");
+	protected class OrderByUNID implements Comparator<CS2420StudentGeneric<Type>> {
 
-		if(!lineIn.hasNext()) {
-			lineIn.close();
-			throw new ParseException("First name", lineNumber);
+		/**
+		 * Returns a negative value if lhs (left-hand side) is smaller than rhs (right-hand side). 
+		 * Returns a positive value if lhs is larger than rhs. 
+		 * Returns 0 if lhs and rhs are equal.
+		 */
+		public int compare(CS2420StudentGeneric<Type> lhs, CS2420StudentGeneric<Type> rhs) {
+			return lhs.getUNID() - rhs.getUNID();
 		}
-		String firstName = lineIn.next();
-
-		if(!lineIn.hasNext()) {
-			lineIn.close();
-			throw new ParseException("Last name", lineNumber);
-		}
-		String lastName = lineIn.next();
-
-		if(!lineIn.hasNext()) {
-			lineIn.close();
-			throw new ParseException("uNID", lineNumber);
-		}
-		String uNIDString = lineIn.next();
-		int uNID = Integer.parseInt(uNIDString.substring(2, 9));
-
-		if(!lineIn.hasNext()) {
-			lineIn.close();
-			throw new ParseException("Email address", lineNumber);
-		}
-		String[] emailAddress = lineIn.next().split("@");
-		
-		lineIn.close();
-
-		return new CS2420Student(firstName, lastName, uNID, new EmailAddress(emailAddress[0], emailAddress[1]));
 	}
-	
+
 	/**
-	 * Helper method for parsing the scores for a student from file.
-	 * 
-	 * @param line - string to be parsed
-	 * @param category - "assignment", "exam", "lab", or "quiz"
-	 * @param student - the student for which to add the scores
+	 * Comparator that defines an ordering among CS 2420 students using their names.
+	 * Compares by last name, then first name (if last names are the same), then uNID 
+	 * (if both names are the same).  uNIDs are guaranteed to be unique.
 	 */
-	private void parseScores(String line, String category, CS2420Student student) {
-		Scanner lineIn = new Scanner(line);
-		lineIn.useDelimiter(" ");
-		while(lineIn.hasNextDouble()) 
-			student.addScore(lineIn.nextDouble(), category);
-		lineIn.close();
+	protected class OrderByName implements Comparator<CS2420StudentGeneric<Type>> {
+		// FILL IN
 	}
 }
+		
