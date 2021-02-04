@@ -106,7 +106,7 @@ public class CS2420ClassGeneric<Type> {
 		for (CS2420StudentGeneric<Type> student : studentList) {
 			sum += student.computeFinalScore();
 		}
-		return (sum/studentList.size());
+		return (sum / studentList.size());
 	}
 
 	/**
@@ -117,11 +117,11 @@ public class CS2420ClassGeneric<Type> {
 	 */
 	public ArrayList<Type> getContactList() {
 		ArrayList<Type> contactList = new ArrayList<>();
-		
+
 		for (CS2420StudentGeneric<Type> student : studentList) {
 			contactList.add(student.getContactInfo());
 		}
-		
+
 		return contactList;
 	}
 
@@ -131,7 +131,7 @@ public class CS2420ClassGeneric<Type> {
 	 */
 	public ArrayList<CS2420StudentGeneric<Type>> getOrderedByUNID() {
 		ArrayList<CS2420StudentGeneric<Type>> studentListCopy = new ArrayList<CS2420StudentGeneric<Type>>();
-		
+
 		for (CS2420StudentGeneric<Type> student : studentList)
 			studentListCopy.add(student);
 
@@ -148,12 +148,12 @@ public class CS2420ClassGeneric<Type> {
 	 */
 	public ArrayList<CS2420StudentGeneric<Type>> getOrderedByName() {
 		ArrayList<CS2420StudentGeneric<Type>> studentListCopy = new ArrayList<CS2420StudentGeneric<Type>>();
-		
+
 		for (CS2420StudentGeneric<Type> student : studentList)
 			studentListCopy.add(student);
-		
+
 		sort(studentListCopy, new OrderByName());
-		
+
 		return studentListCopy;
 	}
 
@@ -166,8 +166,14 @@ public class CS2420ClassGeneric<Type> {
 	 *                    to be included in the returned list
 	 */
 	public ArrayList<CS2420StudentGeneric<Type>> getOrderedByScore(double cutoffScore) {
-		// FILL IN — do not return null
-		return null;
+		ArrayList<CS2420StudentGeneric<Type>> scores = new ArrayList<>();
+		for (CS2420StudentGeneric<Type> student : studentList) {
+			if (student.computeFinalScore() > cutoffScore)
+				scores.add(student);
+		}
+
+		sort(scores, new OrderByScore());
+		return scores;
 	}
 
 	/**
@@ -213,15 +219,27 @@ public class CS2420ClassGeneric<Type> {
 	protected class OrderByName implements Comparator<CS2420StudentGeneric<Type>> {
 		public int compare(CS2420StudentGeneric<Type> lhs, CS2420StudentGeneric<Type> rhs) {
 			int difference = lhs.getLastName().compareTo(rhs.getLastName());
-			
+
 			if (difference == 0) {
 				difference = lhs.getFirstName().compareTo(rhs.getFirstName());
-				
+
 				if (difference == 0) {
 					difference = lhs.getUNID() - rhs.getUNID();
-				}	
+				}
 			}
+
+			return difference;
+		}
+	}
+
+	protected class OrderByScore implements Comparator<CS2420StudentGeneric<Type>> {
+		public int compare(CS2420StudentGeneric<Type> lhs, CS2420StudentGeneric<Type> rhs) {
+			int difference = (int) (lhs.computeFinalScore() - rhs.computeFinalScore());
 			
+			if (difference == 0) {
+				difference = lhs.getUNID() - rhs.getUNID();
+			}
+
 			return difference;
 		}
 	}

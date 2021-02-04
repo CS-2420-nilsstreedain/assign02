@@ -34,8 +34,11 @@ public class CS2420Class {
 	 *         false if the student was not added because they already exist in the collection
 	 */
 	public boolean addStudent(CS2420Student student) {
-		// FILL IN -- do not return false unless appropriate
-		return false;
+		if (lookup(student.getUNID()) != null) {
+			return false;
+		}
+		studentList.add(student);
+		return true;
 	}
 	
 	/**
@@ -45,7 +48,11 @@ public class CS2420Class {
 	 * @return the CS 2420 student with the given uNID, or null if no such student exists in the collection
 	 */
 	public CS2420Student lookup(int uNID) {
-		// FILL IN -- do not return null, unless appropriate
+		for (CS2420Student student : studentList) {
+			if (student.getUNID() == uNID) {
+				return student;
+			}
+		}
 		return null;
 	}
 	
@@ -57,8 +64,13 @@ public class CS2420Class {
 	 * 	     or an empty list if no such students exist in the collection
 	 */
 	public ArrayList<CS2420Student> lookup(EmailAddress contactInfo) {
-		// FILL IN -- do not return null
-		return null;
+		ArrayList<CS2420Student> sameStudents = new ArrayList<>();
+		for (CS2420Student student : studentList) {
+			if (student.getContactInfo() == contactInfo) {
+				sameStudents.add(student);
+			}
+		}
+		return sameStudents;
 	}
 	
 	/**
@@ -72,7 +84,8 @@ public class CS2420Class {
 	 * @param category - the category in which to add the score
 	 */
 	public void addScore(int uNID, double score, String category) {
-		// FILL IN
+		CS2420Student student = this.lookup(uNID);
+		student.addScore(score, category);
 	}
 	
 	/**
@@ -81,8 +94,11 @@ public class CS2420Class {
 	 * @return the average score, or 0 if there are no students in the collection
 	 */
 	public double computeClassAverage() {
-		// FILL IN -- do not return 0, unless appropriate
-		return 0;
+		double sum = 0;
+		for (CS2420Student student : studentList) {
+			sum += student.computeFinalScore();
+		}
+		return (sum / studentList.size());
 	}
 	
 	/**
@@ -91,8 +107,13 @@ public class CS2420Class {
 	 * @return the duplicate-free list of contact information, in any order
 	 */
 	public ArrayList<EmailAddress> getContactList() {
-		// FILL IN -- do not return null
-		return null;
+		ArrayList<EmailAddress> contactList = new ArrayList<>();
+
+		for (CS2420Student student : studentList) {
+			contactList.add(student.getContactInfo());
+		}
+
+		return contactList;
 	}
 	
 	/**
