@@ -1,6 +1,7 @@
 package assign02;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * This class represents a CS2420 student, in which the uNID cannot change once
@@ -81,14 +82,18 @@ public class CS2420Student extends UofUStudent {
 	 * @return undefined
 	 */
 	public double computeFinalScore() {
-		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1)){
+		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1)) {
 			return 0;
 		}
 		double finalScoreSum = 0;
-		finalScoreSum += averageArray(labScores) * LAB_WEIGHT;
-		finalScoreSum += averageArray(assignScores) * ASSIGNMENT_WEIGHT;
-		finalScoreSum += averageArray(quizScores) * QUIZ_WEIGHT;
-		finalScoreSum += averageArray(examScores) * EXAM_WEIGHT;
+		
+		Collections.sort(labScores);
+		Collections.sort(quizScores);
+		
+		finalScoreSum += averageArray(labScores,true) * LAB_WEIGHT;
+		finalScoreSum += averageArray(assignScores,false) * ASSIGNMENT_WEIGHT;
+		finalScoreSum += averageArray(quizScores,true) * QUIZ_WEIGHT;
+		finalScoreSum += averageArray(examScores,false) * EXAM_WEIGHT;
 
 		return finalScoreSum;
 	}
@@ -98,12 +103,19 @@ public class CS2420Student extends UofUStudent {
 	 * 
 	 * @return avg
 	 */
-	private double averageArray(ArrayList<Double> array) {
+	private double averageArray(ArrayList<Double> array, boolean remove) {
 		double avg = 0;
-		for (double score : array) {
-			avg += score;
+		if (remove) {
+			for (int i = 1; i < array.size(); i++) {
+				avg += array.get(i);
+			}
+			avg = avg / (array.size() - 1);
+		} else {
+			for (double score : array) {
+				avg += score;
+			}
+			avg = avg / array.size();
 		}
-		avg = avg / array.size();
 		return avg;
 	}
 
@@ -114,10 +126,10 @@ public class CS2420Student extends UofUStudent {
 	 */
 	public String computeFinalGrade() {
 		double score = computeFinalScore();
-		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1)){
+		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1)) {
 			return "N/A";
 		}
-		
+
 		if (score >= 93.0) {
 			return "A";
 		} else if (score >= 90.0) {
@@ -136,9 +148,9 @@ public class CS2420Student extends UofUStudent {
 			return "C-";
 		} else if (score >= 67.0) {
 			return "D+";
-		} else if (score >= 63.0) { 
+		} else if (score >= 63.0) {
 			return "D";
-		} else if (score >= 60.0) { 
+		} else if (score >= 60.0) {
 			return "D-";
 		} else {
 			return "E";
