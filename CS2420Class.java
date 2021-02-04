@@ -85,7 +85,9 @@ public class CS2420Class {
 	 */
 	public void addScore(int uNID, double score, String category) {
 		CS2420Student student = this.lookup(uNID);
+		if (student != null) {
 		student.addScore(score, category);
+		}
 	}
 	
 	/**
