@@ -118,7 +118,46 @@ public class CS2420ClassGenericTester {
 	}
 	
 	@Test
-	public void testVerySmallStudentFinalGrade() {
+	public void testVerySmallStudentFinalGradeB() {
+		CS2420StudentGeneric<MailingAddress> student = verySmallClass.lookup(2323232);
+		student.addScore(86, "assignment");
+		student.addScore(82, "exam");
+		student.addScore(88, "lab");
+		student.addScore(67, "quiz");
+		student.addScore(85, "assignment");
+		student.addScore(80, "lab");
+		student.addScore(82, "quiz");
+		assertEquals("B", student.computeFinalGrade());
+	}
+	
+	@Test
+	public void testVerySmallStudentFinalGradeBPlus() {
+		CS2420StudentGeneric<MailingAddress> student = verySmallClass.lookup(2323232);
+		student.addScore(86, "assignment");
+		student.addScore(88, "exam");
+		student.addScore(88.5, "lab");
+		student.addScore(67, "quiz");
+		student.addScore(91, "assignment");
+		student.addScore(90, "lab");
+		student.addScore(85, "quiz");
+		assertEquals("B+", student.computeFinalGrade());
+	}
+	
+	@Test
+	public void testVerySmallStudentFinalGradeBMinus() {
+		CS2420StudentGeneric<MailingAddress> student = verySmallClass.lookup(2323232);
+		student.addScore(79, "assignment");
+		student.addScore(80, "exam");
+		student.addScore(85, "lab");
+		student.addScore(81, "quiz");
+		student.addScore(83, "assignment");
+		student.addScore(80, "lab");
+		student.addScore(82, "quiz");
+		assertEquals("B-", student.computeFinalGrade());
+	}
+	
+	@Test
+	public void testVerySmallStudentFinalGradeA() {
 		CS2420StudentGeneric<MailingAddress> student = verySmallClass.lookup(2323232);
 		student.addScore(86.5, "assignment");
 		student.addScore(75, "exam");
@@ -127,8 +166,112 @@ public class CS2420ClassGenericTester {
 		student.addScore(99, "assignment");
 		student.addScore(80, "lab");
 		student.addScore(77.7, "quiz");
-		System.out.println(student.computeFinalScore());
 		assertEquals("B", student.computeFinalGrade());
+	}
+	
+	
+	@Test
+	public void testVerySmallStudentFinalGradeAMinus() {
+		CS2420StudentGeneric<MailingAddress> student = verySmallClass.lookup(2323232);
+		student.addScore(89, "assignment");
+		student.addScore(90, "exam");
+		student.addScore(95, "lab");
+		student.addScore(91, "quiz");
+		student.addScore(93, "assignment");
+		student.addScore(90, "lab");
+		student.addScore(92, "quiz");
+		assertEquals("A-", student.computeFinalGrade());
+	}
+	
+	@Test
+	public void testVerySmallStudentFinalGradeC() {
+		CS2420StudentGeneric<MailingAddress> student = verySmallClass.lookup(2323232);
+		student.addScore(75, "assignment");
+		student.addScore(70, "exam");
+		student.addScore(80, "lab");
+		student.addScore(80, "quiz");
+		student.addScore(77, "assignment");
+		student.addScore(60, "lab");
+		student.addScore(23.2, "quiz");
+		assertEquals("C", student.computeFinalGrade());
+	}
+	
+	@Test
+	public void testVerySmallStudentFinalGradeCPlus() {
+		CS2420StudentGeneric<MailingAddress> student = verySmallClass.lookup(2323232);
+		student.addScore(76, "assignment");
+		student.addScore(78, "exam");
+		student.addScore(78.5, "lab");
+		student.addScore(67, "quiz");
+		student.addScore(81, "assignment");
+		student.addScore(70, "lab");
+		student.addScore(75, "quiz");
+		assertEquals("C+", student.computeFinalGrade());
+	}
+	
+	@Test
+	public void testVerySmallStudentFinalGradeCMinus() {
+		CS2420StudentGeneric<MailingAddress> student = verySmallClass.lookup(2323232);
+		student.addScore(69, "assignment");
+		student.addScore(70, "exam");
+		student.addScore(75, "lab");
+		student.addScore(71, "quiz");
+		student.addScore(73, "assignment");
+		student.addScore(70, "lab");
+		student.addScore(72, "quiz");
+		assertEquals("C-", student.computeFinalGrade());
+	}
+	
+	@Test
+	public void testVerySmallStudentFinalGradeD() {
+		CS2420StudentGeneric<MailingAddress> student = verySmallClass.lookup(2323232);
+		student.addScore(65, "assignment");
+		student.addScore(66, "exam");
+		student.addScore(60, "lab");
+		student.addScore(63, "quiz");
+		student.addScore(65, "assignment");
+		student.addScore(67, "lab");
+		student.addScore(63.3, "quiz");
+		assertEquals("D", student.computeFinalGrade());
+	}
+	
+	@Test
+	public void testVerySmallStudentFinalGradeDPlus() {
+		CS2420StudentGeneric<MailingAddress> student = verySmallClass.lookup(2323232);
+		student.addScore(66, "assignment");
+		student.addScore(68, "exam");
+		student.addScore(68.5, "lab");
+		student.addScore(67, "quiz");
+		student.addScore(71, "assignment");
+		student.addScore(70, "lab");
+		student.addScore(65, "quiz");
+		assertEquals("D+", student.computeFinalGrade());
+	}
+	
+	@Test
+	public void testVerySmallStudentFinalGradeDMinus() {
+		CS2420StudentGeneric<MailingAddress> student = verySmallClass.lookup(2323232);
+		student.addScore(59, "assignment");
+		student.addScore(60, "exam");
+		student.addScore(65, "lab");
+		student.addScore(61, "quiz");
+		student.addScore(63, "assignment");
+		student.addScore(60, "lab");
+		student.addScore(62, "quiz");
+		assertEquals("D-", student.computeFinalGrade());
+	}
+	
+	@Test
+	public void testVerySmallStudentFinalGradeE() {
+		CS2420StudentGeneric<MailingAddress> student = verySmallClass.lookup(2323232);
+		student.addScore(50, "assignment");
+		student.addScore(45, "exam");
+		student.addScore(20, "lab");
+		student.addScore(0, "quiz");
+		student.addScore(36, "assignment");
+		student.addScore(4, "lab");
+		student.addScore(60.0, "quiz");
+		assertEquals("E", student.computeFinalGrade());
 	}
 	
 	@Test
