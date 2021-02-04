@@ -102,6 +102,9 @@ public class CS2420ClassGeneric<Type> {
 		for (CS2420StudentGeneric<Type> student : studentList) {
 			sum += student.computeFinalScore();
 		}
+		if (studentList.size() == 0) {
+			return 0;
+		}
 		return (sum / studentList.size());
 	}
 

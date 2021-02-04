@@ -100,6 +100,9 @@ public class CS2420Class {
 		for (CS2420Student student : studentList) {
 			sum += student.computeFinalScore();
 		}
+		if (studentList.size() == 0) {
+			return 0;
+		}
 		return (sum / studentList.size());
 	}
 	
