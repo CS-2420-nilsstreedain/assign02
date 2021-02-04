@@ -12,10 +12,10 @@ import java.util.Scanner;
  * NOTE: The word "Class" in the name of this Java class means a collection of students and should not 
  *       be confused with the Java term class, which is a blueprint for making objects.
  * 
- * @author Erin Parker and ??
+ * @author Erin Parker, Nils Streedain and Kyle Williams
  * @version January 27, 2021
  */
-public class CS2420ClassGeneric {
+public class CS2420ClassGeneric<Type> {
 
 	private ArrayList<CS2420Student> studentList;
 	
