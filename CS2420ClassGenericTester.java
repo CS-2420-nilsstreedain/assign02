@@ -63,6 +63,10 @@ public class CS2420ClassGenericTester {
 		CS2420StudentGeneric<MailingAddress> actual = verySmallClass.lookup(2323232);
 		assertEquals(expected, actual);
 	}
+	public void testVerySmallLookupUNIDNonExistant() {
+		CS2420StudentGeneric<MailingAddress> actual = verySmallClass.lookup(3141592);
+		assertEquals(null, actual);
+	}
 
 	@Test
 	public void testVerySmallLookupContactInfo() {

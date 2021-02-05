@@ -86,6 +86,11 @@ public class CS2420ClassTester {
 		assertEquals(expectedStudent, actualStudents.get(0));
 	}
 	
+	public void testVerySmallLookupUNIDNonExistant() {
+		CS2420Student actual = verySmallClass.lookup(3141592);
+		assertEquals(null, actual);
+	}
+	
 	@Test
 	public void testVerySmallAddDuplicateStudent() {
 		boolean actual = verySmallClass.addStudent(new CS2420Student("Jane", "Doe", 1010101, 
