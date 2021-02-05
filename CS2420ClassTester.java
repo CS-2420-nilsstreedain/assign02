@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -98,7 +99,16 @@ public class CS2420ClassTester {
 				new EmailAddress("hi", "gmail.com")));
 		assertTrue(actual);		
 	}
-
+	
+	@Test
+	public void testVerySmallAddScoreError() {
+		CS2420Student student = new CS2420Student("Drew", "Hall", 2323232,
+				new EmailAddress("wow","aol.com"));
+		assertThrows(IllegalArgumentException.class, () -> {
+			student.addScore(86.5, "homework");
+		});
+	}
+	
 	@Test
 	public void testVerySmallStudentFinalScore0() {
 		CS2420Student student = verySmallClass.lookup(2323232);
