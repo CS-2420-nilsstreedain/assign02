@@ -80,6 +80,13 @@ public class CS2420ClassGenericTester {
 	}
 
 	@Test
+	public void testVerySmallLookupContactInfoNonExistant() {
+		ArrayList<CS2420StudentGeneric<MailingAddress>> actualStudents = verySmallClass
+				.lookup(new MailingAddress("24 MakeBelieve Ln", "Redania", "Novigrad", 17042));
+		assertEquals(0, actualStudents.size());
+	}
+	
+	@Test
 	public void testVerySmallAddDuplicateStudent() {
 		boolean actual = verySmallClass.addStudent(new CS2420StudentGeneric<MailingAddress>("Jane", "Doe", 1010101,
 				new MailingAddress("101 Cherry St.", "Lebanon", "OH", 45036)));
