@@ -3,6 +3,7 @@ package assign02;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 /**
  * This class contains tests for CS2420ClassGeneric.
  * 
- * @author Erin Parker, Nils Streedain and Kyle Willaims
+ * @author Erin Parker and
  * @version January 27, 2021
  */
 public class CS2420ClassGenericTester {
@@ -62,6 +63,12 @@ public class CS2420ClassGenericTester {
 		CS2420StudentGeneric<MailingAddress> actual = verySmallClass.lookup(2323232);
 		assertEquals(expected, actual);
 	}
+	
+	@Test
+	public void testVerySmallLookupUNIDNonExistant() {
+		CS2420StudentGeneric<MailingAddress> actual = verySmallClass.lookup(3141592);
+		assertEquals(null, actual);
+	}
 
 	@Test
 	public void testVerySmallLookupContactInfo() {
@@ -84,6 +91,15 @@ public class CS2420ClassGenericTester {
 		boolean actual = verySmallClass.addStudent(new CS2420StudentGeneric<MailingAddress>("Jane", "Doe", 1010100,
 				new MailingAddress("101 Cherry St.", "Lebanon", "OH", 45036)));
 		assertTrue(actual);
+	}
+
+	@Test
+	public void testVerySmallAddScoreError() {
+		CS2420StudentGeneric<MailingAddress> student = new CS2420StudentGeneric<MailingAddress>("Drew", "Hall", 2323232,
+				new MailingAddress("101 Cherry St.", "Lebanon", "OH", 45036));
+		assertThrows(IllegalArgumentException.class, () -> {
+			student.addScore(86.5, "homework");
+		});
 	}
 
 	@Test
