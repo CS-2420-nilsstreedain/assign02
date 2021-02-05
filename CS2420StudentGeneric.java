@@ -58,6 +58,7 @@ public class CS2420StudentGeneric<Type> extends UofUStudent {
 	 * @param category
 	 */
 	public void addScore(double score, String category) {
+		// Adds the score to the provided assignment category
 		switch (category) {
 		case "lab":
 			labScores.add(score);
@@ -86,9 +87,8 @@ public class CS2420StudentGeneric<Type> extends UofUStudent {
 	public double computeFinalScore() {
 		double finalScoreSum = 0;
 
-		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1)) {
+		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1))
 			return 0;
-		}
 
 		Collections.sort(labScores);
 		Collections.sort(quizScores);
@@ -137,36 +137,36 @@ public class CS2420StudentGeneric<Type> extends UofUStudent {
 	public String computeFinalGrade() {
 		double score = computeFinalScore();
 		String finalGrade;
-		
-		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1)) {
-			return "N/A";
-		}
 
-		if (score >= 93.0) {
+		// Checks to make sure there are enough assignments of each category
+		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1))
+			return "N/A";
+
+		// Find the correct letter grade for the given percentage
+		if (score >= 93.0)
 			finalGrade =  "A";
-		} else if (score >= 90.0) {
+		else if (score >= 90.0)
 			finalGrade = "A-";
-		} else if (score >= 87.0) {
+		else if (score >= 87.0)
 			finalGrade = "B+";
-		} else if (score >= 83.0) {
+		else if (score >= 83.0)
 			finalGrade = "B";
-		} else if (score >= 80.0) {
+		else if (score >= 80.0)
 			finalGrade = "B-";
-		} else if (score >= 77.0) {
+		else if (score >= 77.0)
 			finalGrade = "C+";
-		} else if (score >= 73.0) {
+		else if (score >= 73.0)
 			finalGrade = "C";
-		} else if (score >= 70.0) {
+		else if (score >= 70.0)
 			finalGrade = "C-";
-		} else if (score >= 67.0) {
+		else if (score >= 67.0)
 			finalGrade = "D+";
-		} else if (score >= 63.0) {
+		else if (score >= 63.0)
 			finalGrade = "D";
-		} else if (score >= 60.0) {
+		else if (score >= 60.0)
 			finalGrade = "D-";
-		} else {
+		else
 			finalGrade = "E";
-		}
 		
 		return finalGrade;
 	}

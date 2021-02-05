@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * This class contains tests for CS2420Class.
  * 
- * @author Erin Parker and ??
+ * @author Erin Parker, Nils Streedain and Kyle Willaims
  * @version January 27, 2021
  */
 public class CS2420ClassTester {

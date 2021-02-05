@@ -58,6 +58,7 @@ public class CS2420Student extends UofUStudent {
 	 * @param category
 	 */
 	public void addScore(double score, String category) {
+		// Adds the score to the provided assignmetn category
 		switch (category) {
 		case "lab":
 			labScores.add(score);
@@ -84,18 +85,18 @@ public class CS2420Student extends UofUStudent {
 	 * @return finalScoreSum
 	 */
 	public double computeFinalScore() {
-		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1)) {
-			return 0;
-		}
 		double finalScoreSum = 0;
 		
+		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1))
+			return 0;
+
 		Collections.sort(labScores);
 		Collections.sort(quizScores);
-		
-		finalScoreSum += averageArray(labScores,true) * LAB_WEIGHT;
-		finalScoreSum += averageArray(assignScores,false) * ASSIGNMENT_WEIGHT;
-		finalScoreSum += averageArray(quizScores,true) * QUIZ_WEIGHT;
-		finalScoreSum += averageArray(examScores,false) * EXAM_WEIGHT;
+
+		finalScoreSum += averageArray(labScores, true) * LAB_WEIGHT;
+		finalScoreSum += averageArray(assignScores, false) * ASSIGNMENT_WEIGHT;
+		finalScoreSum += averageArray(quizScores, true) * QUIZ_WEIGHT;
+		finalScoreSum += averageArray(examScores, false) * EXAM_WEIGHT;
 
 		return finalScoreSum;
 	}
@@ -111,6 +112,7 @@ public class CS2420Student extends UofUStudent {
 	 */
 	private double averageArray(ArrayList<Double> array, boolean remove) {
 		double avg = 0;
+		
 		if (remove) {
 			for (int i = 1; i < array.size(); i++) {
 				avg += array.get(i);
@@ -122,6 +124,7 @@ public class CS2420Student extends UofUStudent {
 			}
 			avg = avg / array.size();
 		}
+		
 		return avg;
 	}
 
@@ -133,34 +136,38 @@ public class CS2420Student extends UofUStudent {
 	 */
 	public String computeFinalGrade() {
 		double score = computeFinalScore();
-		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1)) {
+		String finalGrade;
+		
+		// Checks to make sure there are enough assignments of each category
+		if ((labScores.size() < 2) || (quizScores.size() < 2) || (examScores.size() < 1) || (assignScores.size() < 1))
 			return "N/A";
-		}
 
-		if (score >= 93.0) {
-			return "A";
-		} else if (score >= 90.0) {
-			return "A-";
-		} else if (score >= 87.0) {
-			return "B+";
-		} else if (score >= 83.0) {
-			return "B";
-		} else if (score >= 80.0) {
-			return "B-";
-		} else if (score >= 77.0) {
-			return "C+";
-		} else if (score >= 73.0) {
-			return "C";
-		} else if (score >= 70.0) {
-			return "C-";
-		} else if (score >= 67.0) {
-			return "D+";
-		} else if (score >= 63.0) {
-			return "D";
-		} else if (score >= 60.0) {
-			return "D-";
-		} else {
-			return "E";
-		}
+		// Find the correct letter grade for the given percentage
+		if (score >= 93.0)
+			finalGrade =  "A";
+		else if (score >= 90.0)
+			finalGrade = "A-";
+		else if (score >= 87.0)
+			finalGrade = "B+";
+		else if (score >= 83.0)
+			finalGrade = "B";
+		else if (score >= 80.0)
+			finalGrade = "B-";
+		else if (score >= 77.0)
+			finalGrade = "C+";
+		else if (score >= 73.0)
+			finalGrade = "C";
+		else if (score >= 70.0)
+			finalGrade = "C-";
+		else if (score >= 67.0)
+			finalGrade = "D+";
+		else if (score >= 63.0)
+			finalGrade = "D";
+		else if (score >= 60.0)
+			finalGrade = "D-";
+		else
+			finalGrade = "E";
+		
+		return finalGrade;
 	}
 }
