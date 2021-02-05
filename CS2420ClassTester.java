@@ -86,6 +86,7 @@ public class CS2420ClassTester {
 		assertEquals(expectedStudent, actualStudents.get(0));
 	}
 	
+	@Test
 	public void testVerySmallLookupUNIDNonExistant() {
 		CS2420Student actual = verySmallClass.lookup(3141592);
 		assertEquals(null, actual);
