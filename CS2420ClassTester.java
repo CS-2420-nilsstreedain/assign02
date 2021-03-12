@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 /**
- * This class contains tests for CS2420Class.
+ * This class contains tests for CS2420Class
  * 
  * @author Erin Parker, Nils Streedain and Kyle Williams
  * @version January 27, 2021
